@@ -1,21 +1,30 @@
 import React, {useState} from 'react';
 import './App.css';
-import {MoneyFilter} from "./components/MoneyFilter";
+import {FullInput} from './components/FullInput';
+
 
 
 function App() {
-    const [money, setMoney] = useState([
-        {banknots: 'Dollars', value: 100, number: ' a1234567890'},
-        {banknots: 'Dollars', value: 50, number: ' z1234567890'},
-        {banknots: 'RUBLS', value: 100, number: ' w1234567890'},
-        {banknots: 'Dollars', value: 100, number: ' e1234567890'},
-        {banknots: 'Dollars', value: 50, number: ' c1234567890'},
-        {banknots: 'RUBLS', value: 100, number: ' r1234567890'},
-        {banknots: 'Dollars', value: 50, number: ' x1234567890'},
-        {banknots: 'RUBLS', value: 50, number: ' v1234567890'},
+    let[message, setMessage] = useState([
+        {message: 'message1'},
+        {message: 'message2'},
+        {message: 'message3'}
     ])
+
+    const addMessage = (title:string) => {
+        let newMessage = [{message: title}, ...message]
+        setMessage(newMessage)
+    }
+
     return (
-        <MoneyFilter money={money}/>
+        <div className={'App'}>
+            <FullInput addMessage={addMessage}/>
+            {message.map((el,index)=>{
+                return (
+                    <div key={index}>{el.message}</div>
+                )
+            })}
+        </div>
     )
 }
 
